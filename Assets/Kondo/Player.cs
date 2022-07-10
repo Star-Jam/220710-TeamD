@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     [Header("プレイヤーの食べた量")]
     int _mealAmount;
 
-
+    [SerializeField]
+    [Header("エネミーのタグ")]
+    string _enemy;
 
     void Update()
     {
@@ -33,9 +35,11 @@ public class Player : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, pos, _speed * Time.deltaTime);
         }
     }
-
-    private void Eat()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if(collision.tag == _enemy)
+        {
+            _mealAmount++;
+        }
     }
 }
