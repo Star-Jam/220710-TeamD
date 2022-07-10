@@ -16,19 +16,10 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        _spawn = Spawn();
-        StartSpawn();
+        StartCoroutine(Spawn());
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) EndSpawn();
-    }
 
-    // 敵のスポーン開始
-    public void StartSpawn() => StartCoroutine(_spawn);
-    // 敵のスポーン終了
-    public void EndSpawn() => StopCoroutine(_spawn);
 
     // 敵をスポーンさせる
     IEnumerator Spawn()
