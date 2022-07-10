@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : SingletonMonoBehavior<ScoreManager>
 {
+    public int Score => _score;
+
     int _score;
     int _enemyCount;
 
