@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
+    public float A => a;
     /// <summary>/// プレイヤーのレベル/// </summary>
     public int PlayerLevel => _playerLevel;
 
@@ -28,7 +29,7 @@ public class PlayerBase : MonoBehaviour
 
     [Header("前回のポジション")]
     Vector3 latestPos;
-
+    float a;
     Camera _camera;
 
     private void Awake()
@@ -81,7 +82,10 @@ public class PlayerBase : MonoBehaviour
         _playerScale.y += _getBigger;
         transform.localScale = _playerScale;
         if(_speed <= 1)_speed -= 0.05f;
-        _camera.orthographicSize += _getBigger / 2;
+        _camera.orthographicSize += 0.5f;
+        ScoreManager.Instance.AddScore(_playerLevel);
+        UIManager.Instance.AddTextValue(_playerLevel,TextType.Level);
+        a += _getBigger;
     }
 
     private void Eaten()

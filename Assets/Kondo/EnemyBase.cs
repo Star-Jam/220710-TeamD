@@ -28,11 +28,14 @@ public class EnemyBase : MonoBehaviour
 
     Transform _myTransform = default;
 
+    PlayerBase _playerBase;
 
     private void Start()
     {
+        _playerBase = GameObject.FindObjectOfType<PlayerBase>();
         Transform _mytransform = this.transform;
         Invoke(nameof(Delete), _deleteSpeed);
+        //transform.localScale = new Vector2(_playerBase.A, _playerBase.A);
     }
 
     private void Update()

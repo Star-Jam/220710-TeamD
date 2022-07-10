@@ -22,7 +22,15 @@ public class UIManager : SingletonMonoBehavior<UIManager>
     [Header("リザルト画面のテキスト")]
     List<ResultText> _resultTexts = new();
 
+    PlayerBase _playerBase;
+
     const float WAIT_SECONDS = 3;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _playerBase = GameObject.FindObjectOfType<PlayerBase>();
+    }
 
     /// <summary>残り時間や大きさのテキストを書き換える(残り時間はUpdateで大きさは敵に触れるたびに呼び出す)</summary>
     public void AddTextValue(float value, TextType textType)
@@ -50,8 +58,8 @@ public class UIManager : SingletonMonoBehavior<UIManager>
     public IEnumerator ResultPanelSetActive()
     {
         _uiTexts.First(x => x.TextName == "ゲーム終了").TextSetActive(true);
-        //_resultTexts.First(x => x.TextName == "スコア").ChangeText(Score);
-        //_resultTexts.First(x => x.TextName == "魚のレベル").ChangeText(PlayerLevel);
+        _resultTexts.First(x => x.TextName == "スコア").ChangeText(_playerBase.PlayerLevel * 13);
+        _resultTexts.First(x => x.TextName == "魚のレベル").ChangeText(_playerBase.PlayerLevel);
         yield return new WaitForSeconds(WAIT_SECONDS);
         _resultPanel.gameObject.SetActive(true);
     }
