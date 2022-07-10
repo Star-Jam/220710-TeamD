@@ -24,22 +24,16 @@ public class UIManager : SingletonMonoBehavior<UIManager>
 
     const float WAIT_SECONDS = 3;
 
-    private void Start()
-    {
-        AddTextValue(0, TextType.Timer);
-        AddTextValue(0, TextType.Size);
-    }
-
     /// <summary>残り時間や大きさのテキストを書き換える(残り時間はUpdateで大きさは敵に触れるたびに呼び出す)</summary>
-    public void AddTextValue(int value, TextType textType)
+    public void AddTextValue(float value, TextType textType)
     {
         switch (textType)
         {
             case TextType.Timer:
-                _uiTexts.First(x => x.TextName == "残り時間").ChangeText(value);
+                _uiTexts.First(x => x.TextName == "残り時間").ChangeText((int)value);
                 break;
-            case TextType.Size:
-                _uiTexts.First(x => x.TextName == "レベル").ChangeText(value);
+            case TextType.Level:
+                _uiTexts.First(x => x.TextName == "レベル").ChangeText((int)value);
                 break;
         }
     }
@@ -110,7 +104,7 @@ public class UIManager : SingletonMonoBehavior<UIManager>
 public enum TextType
 {
     Timer,
-    Size,
+    Level,
     GameEnd,
 }
 
